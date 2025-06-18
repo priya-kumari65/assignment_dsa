@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+#include <map>
+
+using namespace std;
+
+int main() {
+    vector<pair<int, int>> pairs = {
+        {1, 2},
+        {1, 3},
+        {2, 4},
+        {3, 4}
+    };
+
+    map<int, vector<int>> adjList;
+
+    for (auto edge : pairs) {
+        int u = edge.first;
+        int v = edge.second;
+
+        adjList[u].push_back(v);
+        if (adjList.find(v) == adjList.end()) {
+            adjList[v] = vector<int>();
+        }
+    }
+
+    for (auto& [node, neighbors] : adjList) {
+        cout << node << " → ";
+        for (int neighbor : neighbors) {
+            cout << neighbor << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
